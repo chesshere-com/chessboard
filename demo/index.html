@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>chess-board component demo</title>
+    <link rel="stylesheet" href="./demo.css" />
+  </head>
+  <body>
+    <header class="page-head">
+      <h1>chess-board</h1>
+      <p class="hint">
+        Left-drag or click-click to move. Right-drag draws arrows and circles
+        (shift / alt / meta pick the brush). Left-click clears your drawings.
+      </p>
+    </header>
+
+    <main class="layout">
+      <section class="board-column">
+        <h2>Board A <span class="tag" id="a-tag">free mode</span></h2>
+        <div class="board-host"><div id="board-a"></div></div>
+        <dl class="readout">
+          <dt>FEN</dt>
+          <dd id="a-fen">-</dd>
+          <dt>Material</dt>
+          <dd id="a-material">-</dd>
+          <dt>Last event</dt>
+          <dd id="a-event">-</dd>
+        </dl>
+      </section>
+
+      <section class="board-column">
+        <h2>Board B <span class="tag">isolation check</span></h2>
+        <div class="board-host board-host-small"><div id="board-b"></div></div>
+        <p class="hint">
+          Second instance: own orientation, own piece set, own arrows. Its SVG
+          marker ids are instance-scoped, so board A's arrows keep their colour.
+        </p>
+      </section>
+
+      <section class="board-column">
+        <h2>Game frame <span class="tag">solid chrome</span></h2>
+        <div id="game-frame"></div>
+      </section>
+
+      <section class="controls">
+        <fieldset>
+          <legend>Position</legend>
+          <div class="row">
+            <input id="fen-input" type="text" spellcheck="false" placeholder="piece-placement FEN" />
+            <button id="fen-set">Set</button>
+          </div>
+          <div class="row">
+            <button data-preset="start">Start</button>
+            <button data-preset="clear">Clear</button>
+            <button data-preset="promotion">Promotion</button>
+            <button data-preset="endgame">Endgame</button>
+            <button data-preset="castle960">960 castle</button>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Interaction</legend>
+          <div class="row">
+            <label><input type="checkbox" id="opt-free" checked /> free move</label>
+            <label><input type="checkbox" id="opt-viewonly" /> view only</label>
+            <label><input type="checkbox" id="opt-ghost" checked /> drag ghost</label>
+          </div>
+          <div class="row">
+            <button id="flip">Flip orientation</button>
+            <button id="stop">stop()</button>
+            <button id="destroy-b">destroy B</button>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Appearance</legend>
+          <div class="row">
+            <label>Piece set <select id="piece-set"></select></label>
+            <label>Coords
+              <select id="coords">
+                <option value="inside">inside</option>
+                <option value="outside">outside</option>
+                <option value="hidden">hidden</option>
+              </select>
+            </label>
+            <label>Ranks
+              <select id="ranks-position">
+                <option value="right">right</option>
+                <option value="left">left</option>
+              </select>
+            </label>
+          </div>
+          <div class="row">
+            <label>Animation <input id="anim" type="range" min="0" max="1000" step="20" value="200" />
+              <output id="anim-out">200 ms</output>
+            </label>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Shapes (autoShapes channel)</legend>
+          <div class="row">
+            <button data-shapes="arrows">Arrows</button>
+            <button data-shapes="converging">Converging arrows</button>
+            <button data-shapes="circles">Circles</button>
+            <button data-shapes="glyphs">Glyphs</button>
+            <button data-shapes="regions">Regions</button>
+            <button data-shapes="labels">Labels</button>
+            <button data-shapes="pieces">Ghost pieces</button>
+            <button data-shapes="effects">Effects</button>
+            <button data-shapes="clear">Clear auto</button>
+          </div>
+          <p class="hint">
+            Your right-drag scribbles live in a separate channel and survive
+            every button here.
+          </p>
+        </fieldset>
+
+        <fieldset>
+          <legend>Premove</legend>
+          <div class="row">
+            <button id="premove-setup">Set up (black to move)</button>
+            <button id="premove-play">Opponent replies -&gt; playPremove()</button>
+            <button id="premove-cancel">cancelPremove()</button>
+          </div>
+          <p class="hint" id="premove-hint">
+            Press "Set up", then drag a white piece: the move is stored, not
+            played. "Opponent replies" makes a black move and runs the premove.
+          </p>
+        </fieldset>
+      </section>
+    </main>
+
+    <script type="module" src="./demo.ts"></script>
+  </body>
+</html>

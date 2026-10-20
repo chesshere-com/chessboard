@@ -1,0 +1,553 @@
+/*
+ * chess-board component stylesheet.
+ *
+ * Plain CSS by design: the component is standalone and themes without a build step. Everything is
+ * keyed on --cb-* custom properties with fallbacks, so a host page restyles
+ * the board by setting variables on any ancestor.
+ *
+ * Layout: cb-board fills the container and is deliberately NOT a stacking
+ * context, so its square and piece children interleave with the sibling SVG
+ * layers by z-index alone.
+ *
+ * z-index ladder
+ *   0  cb-square (highlights)
+ *   1  svg.cb-shapes-below (regions)
+ *   2  piece.cb-fading
+ *   3  piece
+ *   4  svg.cb-shapes (arrows, circles, glyphs)
+ *   5  cb-auto-pieces (ghost pieces, effects)
+ *   8  piece.cb-anim
+ *  10  .cb-promotion
+ *  11  piece.cb-dragging
+ */
+
+.cb-wrap {
+  position: relative;
+  display: block;
+  box-sizing: border-box;
+  container-type: inline-size;
+  /* The grid is inherently LTR; isolating it stops RTL hosts mirroring it. */
+  direction: ltr;
+  unicode-bidi: isolate;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.cb-wrap * {
+  box-sizing: border-box;
+}
+
+cb-container {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  /* No transform/filter/opacity here: it must not become a stacking context. */
+}
+
+cb-board {
+  position: absolute;
+  inset: 0;
+  display: block;
+  overflow: hidden;
+  background-color: var(--cb-light, #f0d9b5);
+  /* One conic tile covers 2x2 squares; the pattern is 180-degree symmetric so
+     it is correct for both orientations without being redrawn. */
+  background-image: conic-gradient(
+    var(--cb-dark, #b58863) 25%,
+    transparent 0 50%,
+    var(--cb-dark, #b58863) 0 75%,
+    transparent 0
+  );
+  background-size: 25% 25%;
+  /* Not `none`: the board decides per touch whether it wants the gesture, and
+     the non-passive touchstart handler blocks the scroll by preventDefault
+     when it does. Declaring `none` here would take scrolling and pinch-zoom
+     away from the page before drag.ts ever gets a say. */
+  touch-action: manipulation;
+}
+
+.cb-wrap:not(.manipulable) cb-board {
+  touch-action: auto;
+}
+
+cb-square,
+.cb-wrap piece {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 12.5%;
+  height: 12.5%;
+  will-change: transform;
+}
+
+cb-square {
+  display: block;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.cb-wrap piece {
+  display: block;
+  z-index: 3;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center;
+  pointer-events: none;
+}
+
+/* --- square highlights ---------------------------------------------------- */
+
+cb-square.cb-last-move {
+  background-color: var(--cb-last-move, rgba(155, 199, 0, 0.41));
+}
+
+cb-square.cb-selected {
+  background-color: var(--cb-selected, rgba(246, 246, 105, 0.5));
+}
+
+cb-square.cb-current-premove {
+  background-color: var(--cb-current-premove, rgba(20, 30, 85, 0.5));
+}
+
+cb-square.cb-check {
+  background: var(--cb-check, radial-gradient(
+    ellipse at center,
+    rgba(255, 0, 0, 1) 0%,
+    rgba(231, 0, 0, 1) 25%,
+    rgba(169, 0, 0, 0) 89%,
+    rgba(158, 0, 0, 0) 100%
+  ));
+}
+
+cb-square.cb-move-dest {
+  background: radial-gradient(
+    var(--cb-move-dest, rgba(20, 85, 30, 0.5)) calc(var(--cb-move-dest-size, 22%) / 2),
+    transparent calc(var(--cb-move-dest-size, 22%) / 2)
+  );
+}
+
+cb-square.cb-premove-dest {
+  background: radial-gradient(
+    var(--cb-premove-dest, rgba(20, 30, 85, 0.5)) calc(var(--cb-move-dest-size, 22%) / 2),
+    transparent calc(var(--cb-move-dest-size, 22%) / 2)
+  );
+}
+
+/* Occupied targets read as a ring around the piece rather than a dot under it. */
+cb-square.cb-move-dest.cb-oc {
+  background: radial-gradient(transparent 0 79%, var(--cb-oc, rgba(20, 85, 30, 0.3)) 80%);
+}
+
+cb-square.cb-premove-dest.cb-oc {
+  background: radial-gradient(transparent 0 79%, var(--cb-premove-dest, rgba(20, 30, 85, 0.5)) 80%);
+}
+
+cb-square.cb-drag-over {
+  box-shadow: inset 0 0 0 3px var(--cb-drag-over, rgba(20, 85, 30, 0.85));
+}
+
+/* --- piece states --------------------------------------------------------- */
+
+.cb-wrap piece.cb-fading {
+  z-index: 2;
+  opacity: 0.4;
+}
+
+.cb-wrap piece.cb-anim {
+  z-index: 8;
+}
+
+.cb-wrap piece.cb-dragging {
+  z-index: 11;
+  cursor: grabbing;
+}
+
+.cb-wrap piece.cb-ghost {
+  display: none;
+  z-index: 2;
+  opacity: var(--cb-ghost-opacity, 0.3);
+  pointer-events: none;
+}
+
+.cb-wrap.manipulable cb-board {
+  cursor: pointer;
+}
+
+/* --- overlay layers ------------------------------------------------------- */
+
+.cb-wrap svg.cb-shapes-below,
+.cb-wrap svg.cb-shapes {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: visible;
+  opacity: 0.9;
+}
+
+.cb-wrap svg.cb-shapes-below {
+  z-index: 1;
+}
+
+.cb-wrap svg.cb-shapes {
+  z-index: 4;
+}
+
+cb-auto-pieces {
+  position: absolute;
+  inset: 0;
+  display: block;
+  z-index: 5;
+  pointer-events: none;
+}
+
+cb-auto-pieces piece,
+cb-auto-pieces .cb-effect {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 12.5%;
+  height: 12.5%;
+}
+
+/* --- effects -------------------------------------------------------------- */
+
+.cb-effect {
+  border-radius: 6%;
+}
+
+.cb-effect-pulse {
+  animation: cb-pulse 0.7s ease-out 2;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.55), transparent 70%);
+}
+
+.cb-effect-glow {
+  animation: cb-glow 1.1s ease-in-out 2;
+}
+
+.cb-effect-shake {
+  animation: cb-shake 0.45s ease-in-out 1;
+}
+
+.cb-effect-correct {
+  animation: cb-flash 0.6s ease-out 1;
+  --cb-effect-color: rgba(40, 170, 70, 0.75);
+}
+
+.cb-effect-wrong {
+  animation: cb-flash 0.6s ease-out 1;
+  --cb-effect-color: rgba(200, 45, 45, 0.75);
+}
+
+@keyframes cb-pulse {
+  0% {
+    transform: scale(0.6);
+    opacity: 0;
+  }
+  40% {
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.35);
+    opacity: 0;
+  }
+}
+
+@keyframes cb-glow {
+  0%,
+  100% {
+    box-shadow: inset 0 0 0 0 rgba(255, 226, 120, 0);
+  }
+  50% {
+    box-shadow: inset 0 0 14px 4px rgba(255, 226, 120, 0.9);
+  }
+}
+
+@keyframes cb-shake {
+  0%,
+  100% {
+    margin-left: 0;
+  }
+  20% {
+    margin-left: -8%;
+  }
+  45% {
+    margin-left: 7%;
+  }
+  70% {
+    margin-left: -4%;
+  }
+}
+
+@keyframes cb-flash {
+  0% {
+    background-color: var(--cb-effect-color);
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  100% {
+    background-color: var(--cb-effect-color);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cb-effect-pulse,
+  .cb-effect-glow,
+  .cb-effect-shake,
+  .cb-effect-correct,
+  .cb-effect-wrong,
+  .cb-promotion-choice {
+    animation-duration: 1ms;
+    animation-iteration-count: 1;
+  }
+}
+
+/* --- promotion ------------------------------------------------------------ */
+
+.cb-promotion {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+}
+
+.cb-promotion-cancel {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+}
+
+.cb-wrap .cb-promotion-choice {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 12.5%;
+  height: 12.5%;
+  padding: 0;
+  border: 0;
+  background-color: rgba(244, 244, 244, 0.94);
+  border-radius: 50%;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.45);
+  cursor: pointer;
+  pointer-events: auto;
+  animation: cb-promo-in 140ms ease-out backwards;
+  animation-delay: calc(var(--cb-promo-index, 0) * 45ms);
+}
+
+.cb-wrap .cb-promotion-choice:hover,
+.cb-wrap .cb-promotion-choice:focus-visible {
+  background-color: #fff;
+  box-shadow: 0 0 0 3px rgba(120, 190, 255, 0.9);
+}
+
+@keyframes cb-promo-in {
+  from {
+    opacity: 0;
+    scale: 0.72;
+  }
+  to {
+    opacity: 1;
+    scale: 1;
+  }
+}
+
+/* --- coordinates ---------------------------------------------------------- */
+
+.cb-coords {
+  display: flex;
+  font-size: calc(var(--cb-coord-size, 3.4cqw) * 0.72);
+  font-weight: 700;
+  line-height: 1;
+  pointer-events: none;
+}
+
+.cb-coord {
+  display: flex;
+  flex: 1 1 0;
+  align-items: center;
+  justify-content: center;
+}
+
+/* inside: labels ride the edge squares and take the opposite square colour */
+.cb-coords-inside {
+  position: absolute;
+  z-index: 6;
+}
+
+.cb-coords-files.cb-coords-inside {
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: var(--cb-coord-size, 3.4cqw);
+}
+
+/* Lengths, not percentages: percentage padding resolves against the strip's
+   width, which has nothing to do with the label's height. */
+.cb-coords-files.cb-coords-inside .cb-coord {
+  align-items: flex-end;
+  justify-content: flex-end;
+  padding-right: calc(var(--cb-coord-size, 3.4cqw) * 0.22);
+  padding-bottom: calc(var(--cb-coord-size, 3.4cqw) * 0.2);
+}
+
+.cb-coords-ranks.cb-coords-inside {
+  top: 0;
+  bottom: 0;
+  flex-direction: column;
+  width: var(--cb-coord-size, 3.4cqw);
+}
+
+.cb-coords-ranks.cb-coords-inside.cb-coords-left {
+  left: 0;
+}
+
+.cb-coords-ranks.cb-coords-inside.cb-coords-right {
+  right: 0;
+}
+
+.cb-coords-ranks.cb-coords-inside .cb-coord {
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: calc(var(--cb-coord-size, 3.4cqw) * 0.2);
+}
+
+.cb-coord-light {
+  color: var(--cb-coord-light, #f0d9b5);
+}
+
+.cb-coord-dark {
+  color: var(--cb-coord-dark, #b58863);
+}
+
+/* outside: the wrap becomes a grid and each strip claims its own track */
+.cb-wrap.cb-outside-coords {
+  display: grid;
+}
+
+.cb-wrap.cb-outside-coords.cb-ranks-left {
+  grid-template-columns: var(--cb-coord-size, 3.4cqw) minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr) var(--cb-coord-size, 3.4cqw);
+}
+
+.cb-wrap.cb-outside-coords.cb-ranks-left > cb-container {
+  grid-area: 1 / 2;
+}
+
+.cb-wrap.cb-outside-coords.cb-ranks-left > .cb-coords-ranks {
+  grid-area: 1 / 1;
+}
+
+.cb-wrap.cb-outside-coords.cb-ranks-left > .cb-coords-files {
+  grid-area: 2 / 2;
+}
+
+.cb-wrap.cb-outside-coords.cb-ranks-right {
+  grid-template-columns: minmax(0, 1fr) var(--cb-coord-size, 3.4cqw);
+  grid-template-rows: minmax(0, 1fr) var(--cb-coord-size, 3.4cqw);
+}
+
+.cb-wrap.cb-outside-coords.cb-ranks-right > cb-container {
+  grid-area: 1 / 1;
+}
+
+.cb-wrap.cb-outside-coords.cb-ranks-right > .cb-coords-ranks {
+  grid-area: 1 / 2;
+}
+
+.cb-wrap.cb-outside-coords.cb-ranks-right > .cb-coords-files {
+  grid-area: 2 / 1;
+}
+
+.cb-coords-ranks.cb-coords-outside {
+  flex-direction: column;
+}
+
+/* --- piece art ------------------------------------------------------------
+ * The 12 URLs are variables so switching sets is a variable swap; see
+ * piece-sets.css for the shipped sets.
+ * ------------------------------------------------------------------------- */
+
+.cb-wrap piece.white.pawn {
+  background-image: var(--cb-piece-white-pawn, url("../pieces/cburnett/wP.svg"));
+}
+.cb-wrap piece.white.knight {
+  background-image: var(--cb-piece-white-knight, url("../pieces/cburnett/wN.svg"));
+}
+.cb-wrap piece.white.bishop {
+  background-image: var(--cb-piece-white-bishop, url("../pieces/cburnett/wB.svg"));
+}
+.cb-wrap piece.white.rook {
+  background-image: var(--cb-piece-white-rook, url("../pieces/cburnett/wR.svg"));
+}
+.cb-wrap piece.white.queen {
+  background-image: var(--cb-piece-white-queen, url("../pieces/cburnett/wQ.svg"));
+}
+.cb-wrap piece.white.king {
+  background-image: var(--cb-piece-white-king, url("../pieces/cburnett/wK.svg"));
+}
+.cb-wrap piece.black.pawn {
+  background-image: var(--cb-piece-black-pawn, url("../pieces/cburnett/bP.svg"));
+}
+.cb-wrap piece.black.knight {
+  background-image: var(--cb-piece-black-knight, url("../pieces/cburnett/bN.svg"));
+}
+.cb-wrap piece.black.bishop {
+  background-image: var(--cb-piece-black-bishop, url("../pieces/cburnett/bB.svg"));
+}
+.cb-wrap piece.black.rook {
+  background-image: var(--cb-piece-black-rook, url("../pieces/cburnett/bR.svg"));
+}
+.cb-wrap piece.black.queen {
+  background-image: var(--cb-piece-black-queen, url("../pieces/cburnett/bQ.svg"));
+}
+.cb-wrap piece.black.king {
+  background-image: var(--cb-piece-black-king, url("../pieces/cburnett/bK.svg"));
+}
+
+/* Resize grip (config.resizable) */
+.cb-wrap cb-resize {
+  position: absolute;
+  right: -9px;
+  bottom: -9px;
+  width: 20px;
+  height: 20px;
+  cursor: nwse-resize;
+  z-index: 12;
+  touch-action: none;
+}
+.cb-wrap cb-resize::before,
+.cb-wrap cb-resize::after {
+  content: "";
+  position: absolute;
+  right: 3px;
+  bottom: 3px;
+  height: 2px;
+  border-radius: 1px;
+  background: var(--cb-resize-grip, rgba(128, 128, 128, 0.8));
+  transform: rotate(-45deg);
+  transform-origin: 100% 100%;
+}
+.cb-wrap cb-resize::before {
+  width: 12px;
+}
+.cb-wrap cb-resize::after {
+  width: 6px;
+  bottom: 7px;
+}
+body.cb-resizing {
+  cursor: nwse-resize;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.cb-wrap .cb-promotion-choice piece {
+  width: 100%;
+  height: 100%;
+}

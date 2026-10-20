@@ -1,0 +1,67 @@
+{
+  "name": "@chesshere/chessboard",
+  "version": "0.1.0",
+  "description": "Framework-agnostic, dependency-free chessboard: animated, draggable, premoves, shapes, 960 and three-check, with optional SolidJS bindings.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chesshere-com/chessboard.git"
+  },
+  "homepage": "https://github.com/chesshere-com/chessboard#readme",
+  "bugs": "https://github.com/chesshere-com/chessboard/issues",
+  "keywords": [
+    "chess",
+    "chessboard",
+    "chess-board",
+    "ui",
+    "typescript",
+    "solidjs"
+  ],
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/src/index.d.ts",
+      "import": "./dist/core.js"
+    },
+    "./solid": {
+      "types": "./dist/solid/index.d.ts",
+      "import": "./dist/solid.js"
+    },
+    "./assets": {
+      "types": "./dist/adapters/piece-assets.d.ts",
+      "import": "./dist/assets.js"
+    },
+    "./board.css": "./dist/assets/chess-board.css",
+    "./chrome.css": "./dist/assets/chrome.css",
+    "./piece-sets.css": "./dist/assets/piece-sets.css",
+    "./pieces/*": "./dist/pieces/*"
+  },
+  "peerDependencies": {
+    "solid-js": "^1.9.0"
+  },
+  "peerDependenciesMeta": {
+    "solid-js": {
+      "optional": true
+    }
+  },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "prepack": "npm run build",
+    "test:package": "node scripts/smoke-package.mjs",
+    "demo": "vite --config demo/vite.demo.config.mjs",
+    "test": "node --experimental-strip-types --test tests/*.test.mjs",
+    "typecheck": "tsc -p tsconfig.json"
+  },
+  "devDependencies": {
+    "solid-js": "^1.9.15",
+    "typescript": "^5.9.3",
+    "vite": "^7.3.6",
+    "vite-plugin-solid": "^2.11.14"
+  }
+}

@@ -1,0 +1,96 @@
+ChessHere bundled chess piece sets
+
+Directory and file names are packaging choices.
+Cburnett XML document type declarations were removed to avoid external DTD references.
+Flat CC0, Font Awesome Chess, and Material Design Chess were recolored and given
+contrasting outlines to produce separate white and black piece files.
+License texts are in the LICENSES directory.
+
+RhosGFX
+Files: rhosgfx/*.svg
+Author: RhosGFX
+Source: https://github.com/lichess-org/lila/tree/master/public/piece/rhosgfx
+License: CC0 1.0 Universal (LICENSES/CC0-1.0.txt)
+
+Fantasy
+Files: fantasy/*.svg
+Author: Maurizio Monge
+Source: https://github.com/lichess-org/lila/tree/master/public/piece/fantasy
+License: MIT (LICENSES/MIT.txt)
+
+Spatial
+Files: spatial/*.svg
+Author: Maurizio Monge
+Source: https://github.com/lichess-org/lila/tree/master/public/piece/spatial
+License: MIT (LICENSES/MIT.txt)
+
+Celtic
+Files: celtic/*.svg
+Author: Maurizio Monge
+Source: https://github.com/lichess-org/lila/tree/master/public/piece/celtic
+License: MIT (LICENSES/MIT.txt)
+
+Chessnut
+Files: chessnut/*.svg
+Author: Alexis Luengas
+Source: https://github.com/lichess-org/lila/tree/master/public/piece/chessnut
+License: Apache License 2.0 (LICENSES/Apache-2.0.txt)
+
+Cburnett
+Files: cburnett/*.svg
+Author: Colin M.L. Burnett and Wikimedia contributors
+Source: https://commons.wikimedia.org/wiki/Template:SVG_chess_pieces
+License: BSD 3-Clause (LICENSES/BSD-3-Clause.txt)
+The files were downloaded directly from Wikimedia Commons, whose file pages offer the BSD
+3-Clause license as one of the selectable licenses. ChessHere elects the BSD 3-Clause option.
+The GPL-labelled Lichess distribution is not the source of these files.
+
+Firi
+Files: firi/*.svg
+Author: James Faure
+Source: https://github.com/lichess-org/lila/tree/master/public/piece/firi
+License: Creative Commons Attribution 4.0 International (LICENSES/CC-BY-4.0.txt)
+Attribution: "Firi chess pieces by James Faure, licensed under CC BY 4.0."
+Changes: None.
+
+Kiwen Suwi
+Files: kiwen-suwi/*.svg
+Author: neverRare
+Source: https://github.com/lichess-org/lila/tree/master/public/piece/kiwen-suwi
+License: Creative Commons Attribution 4.0 International (LICENSES/CC-BY-4.0.txt)
+Attribution: "Kiwen Suwi chess pieces by neverRare, licensed under CC BY 4.0."
+Changes: None.
+
+Livius
+Files: livius/*.svg
+Author: Martin Sedlák
+Source: https://github.com/kmar/chess_svg_piece_sets/tree/main/livius
+License: Public domain dedication (LICENSES/Public-Domain-Dedication.txt)
+Changes: File names normalized to ChessHere's piece naming convention.
+
+Flat CC0
+Files: flat-cc0/*.svg
+Author: femrek
+Source: https://opengameart.org/content/chess-pieces-in-svg-format
+License: CC0 1.0 Universal (LICENSES/CC0-1.0.txt)
+Changes: Generated white and black variants with contrasting outlines; source file
+"rok.svg" was renamed to the standard rook piece name.
+
+Font Awesome Chess
+Files: font-awesome/*.svg
+Author: Fonticons, Inc.
+Source: https://github.com/FortAwesome/Font-Awesome/tree/6.7.2/svgs/solid
+License: Creative Commons Attribution 4.0 International (LICENSES/CC-BY-4.0.txt)
+Attribution: "Font Awesome Free 6.7.2 by Fonticons, Inc., licensed under CC BY 4.0."
+Changes: Generated white and black variants with contrasting outlines. Original
+Font Awesome attribution comments are retained in every SVG.
+
+Material Design Chess
+Files: material-design/*.svg
+Author: Pictogrammers contributors
+Source: https://github.com/Templarian/MaterialDesign/tree/master/svg
+License: Apache License 2.0 (LICENSES/Apache-2.0.txt)
+Changes: Generated white and black variants with contrasting outlines.
+
+Per-set licensing and authorship for Lichess-hosted assets:
+https://github.com/lichess-org/lila/blob/master/COPYING.md

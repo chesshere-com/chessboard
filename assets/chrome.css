@@ -1,0 +1,376 @@
+/*
+ * chess-board chrome stylesheet — nav controls, player bars, captured material
+ * and clocks.
+ *
+ * Raw CSS by design, same approved exception as chess-board.css: the package is
+ * standalone and must look right with no build step and no design system.
+ *
+ * Colour strategy: every neutral is derived from `currentColor` via color-mix,
+ * so the chrome adopts the host's text colour and reads correctly on light and
+ * dark backgrounds without a theme switch. Only the three semantic signals
+ * (connection quality, presence, low time) carry literal hues, and each is a
+ * --cb-* variable a host can override.
+ *
+ * Layout uses logical properties throughout (inline-start/end, margin-inline),
+ * so RTL hosts mirror the chrome. The board interior stays LTR on its own.
+ */
+
+.cb-nav,
+.cb-playerbar,
+.cb-captured,
+.cb-clock {
+  --cb-chrome-fg: currentColor;
+  --cb-chrome-muted: color-mix(in srgb, currentColor 62%, transparent);
+  --cb-chrome-surface: color-mix(in srgb, currentColor 8%, transparent);
+  --cb-chrome-surface-hover: color-mix(in srgb, currentColor 16%, transparent);
+  --cb-chrome-surface-active: color-mix(in srgb, currentColor 24%, transparent);
+  --cb-chrome-border: color-mix(in srgb, currentColor 18%, transparent);
+  --cb-chrome-focus: color-mix(in srgb, currentColor 60%, transparent);
+  --cb-chrome-radius: 0.5rem;
+  --cb-chrome-gap: 0.5rem;
+  --cb-chrome-disabled-opacity: 0.35;
+
+  box-sizing: border-box;
+}
+
+.cb-nav *,
+.cb-playerbar *,
+.cb-captured *,
+.cb-clock * {
+  box-sizing: border-box;
+}
+
+/* --- nav controls --------------------------------------------------------- */
+
+.cb-nav {
+  display: flex;
+  align-items: stretch;
+  gap: 2px;
+  /* The transport maps to move-list order, which is notation order and always
+     runs left-to-right; mirroring it in RTL would point the chevrons the wrong
+     way relative to the moves they step through. */
+  direction: ltr;
+}
+
+.cb-nav-btn {
+  display: inline-flex;
+  flex: 1 1 0;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.25rem;
+  min-height: 2.25rem;
+  padding: 0.35rem 0.5rem;
+  color: var(--cb-chrome-fg);
+  background: var(--cb-chrome-surface);
+  border: 1px solid var(--cb-chrome-border);
+  border-radius: var(--cb-chrome-radius);
+  cursor: pointer;
+  /* Compositor-only: no layout or paint work on press. */
+  transition:
+    background-color 120ms ease,
+    transform 90ms ease;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.cb-nav-btn:hover:not(:disabled) {
+  background: var(--cb-chrome-surface-hover);
+}
+
+.cb-nav-btn:active:not(:disabled) {
+  background: var(--cb-chrome-surface-active);
+  transform: scale(0.96);
+}
+
+.cb-nav-btn:focus-visible {
+  outline: 2px solid var(--cb-chrome-focus);
+  outline-offset: 2px;
+}
+
+.cb-nav-btn:disabled {
+  opacity: var(--cb-chrome-disabled-opacity);
+  cursor: default;
+}
+
+.cb-nav-icon {
+  display: block;
+  width: 1.25em;
+  height: 1.25em;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cb-nav-btn {
+    transition: none;
+  }
+  .cb-nav-btn:active:not(:disabled) {
+    transform: none;
+  }
+}
+
+/* --- player bar ----------------------------------------------------------- */
+
+.cb-playerbar {
+  display: flex;
+  align-items: center;
+  gap: var(--cb-chrome-gap);
+  min-width: 0;
+  padding: 0.35rem 0.5rem;
+  border-radius: var(--cb-chrome-radius);
+  /* Transparent border, not none: the active state must not shift the row. */
+  border: 1px solid transparent;
+  line-height: 1.2;
+}
+
+.cb-playerbar-active {
+  background: var(--cb-chrome-surface);
+  border-color: var(--cb-chrome-border);
+}
+
+.cb-playerbar-figure {
+  position: relative;
+  flex: none;
+  display: block;
+  width: 2rem;
+  height: 2rem;
+}
+
+.cb-playerbar-avatar {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: var(--cb-chrome-surface);
+  border-radius: 50%;
+}
+
+.cb-playerbar-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.cb-playerbar-initial {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--cb-chrome-muted);
+}
+
+.cb-playerbar-dot {
+  position: absolute;
+  inset-block-end: 0;
+  inset-inline-end: 0;
+  width: 0.625rem;
+  height: 0.625rem;
+  background: var(--cb-offline, color-mix(in srgb, currentColor 35%, transparent));
+  border: 2px solid var(--cb-chrome-dot-ring, transparent);
+  border-radius: 50%;
+}
+
+.cb-playerbar-dot-on {
+  background: var(--cb-online, #22c55e);
+}
+
+.cb-playerbar-id {
+  display: flex;
+  min-width: 0;
+  align-items: baseline;
+  gap: 0.35rem;
+}
+
+.cb-playerbar-name {
+  overflow: hidden;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cb-playerbar-title {
+  flex: none;
+  padding: 0.05rem 0.3rem;
+  font-size: 0.7em;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  /* Pulling the accent 22% toward currentColor is what makes one hue legible in
+     both schemes: it lightens on a dark host and darkens on a light one. */
+  color: color-mix(in srgb, var(--cb-title-accent, #f59e0b) 78%, currentColor);
+  background: color-mix(in srgb, var(--cb-title-accent, #f59e0b) 20%, transparent);
+  border-radius: 0.25rem;
+}
+
+.cb-playerbar-rating {
+  flex: none;
+  font-size: 0.85em;
+  font-variant-numeric: tabular-nums;
+  color: var(--cb-chrome-muted);
+}
+
+.cb-playerbar-icons {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.cb-playerbar-spacer {
+  flex: 1 1 auto;
+  min-width: 0.25rem;
+}
+
+/* --- connection meter ----------------------------------------------------- */
+
+.cb-playerbar-conn {
+  display: inline-flex;
+  flex: none;
+  align-items: flex-end;
+  gap: 1px;
+  height: 0.875rem;
+}
+
+.cb-playerbar-conn-bar {
+  display: block;
+  width: 3px;
+  background: color-mix(in srgb, currentColor 22%, transparent);
+  border-radius: 1px;
+}
+
+.cb-playerbar-conn-bar:nth-child(1) {
+  height: 35%;
+}
+.cb-playerbar-conn-bar:nth-child(2) {
+  height: 55%;
+}
+.cb-playerbar-conn-bar:nth-child(3) {
+  height: 78%;
+}
+.cb-playerbar-conn-bar:nth-child(4) {
+  height: 100%;
+}
+
+.cb-playerbar-conn[data-cb-conn="4"] .cb-playerbar-conn-on,
+.cb-playerbar-conn[data-cb-conn="3"] .cb-playerbar-conn-on {
+  background: var(--cb-conn-good, #22c55e);
+}
+
+.cb-playerbar-conn[data-cb-conn="2"] .cb-playerbar-conn-on {
+  background: var(--cb-conn-fair, #eab308);
+}
+
+.cb-playerbar-conn[data-cb-conn="1"] .cb-playerbar-conn-on,
+.cb-playerbar-conn[data-cb-conn="0"] .cb-playerbar-conn-on {
+  background: var(--cb-conn-poor, #ef4444);
+}
+
+/* --- clock ---------------------------------------------------------------- */
+
+.cb-clock {
+  display: inline-block;
+  flex: none;
+  padding: 0.15rem 0.5rem;
+  font-size: 1.15rem;
+  font-weight: 600;
+  /* Fixed-advance digits: without this every tick re-measures and the row
+     jitters (and reflows) once a second. */
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+  color: var(--cb-chrome-fg);
+  background: var(--cb-chrome-surface);
+  border: 1px solid transparent;
+  border-radius: var(--cb-chrome-radius);
+  white-space: nowrap;
+}
+
+.cb-clock-running {
+  border-color: var(--cb-chrome-border);
+  background: var(--cb-chrome-surface-hover);
+}
+
+/* Same scheme-adaptive mix as the title badge: one hue, legible either way. */
+.cb-clock-low {
+  color: color-mix(in srgb, var(--cb-clock-low, #ef4444) 80%, currentColor);
+  background: color-mix(in srgb, var(--cb-clock-low, #ef4444) 16%, transparent);
+}
+
+.cb-clock-low.cb-clock-running {
+  border-color: color-mix(in srgb, var(--cb-clock-low, #ef4444) 70%, transparent);
+}
+
+/* --- captured material ----------------------------------------------------
+ * chess-board.css scopes its piece rules to `.cb-wrap`, and the default
+ * variable block lives there too, so a chrome row outside the board gets
+ * neither. These rules read the same --cb-piece-* variables with a url()
+ * fallback: an ancestor (or the component's own data-cb-pieces) still wins,
+ * but a bare row on a plain page still shows pieces.
+ * ------------------------------------------------------------------------- */
+
+.cb-captured {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  min-height: 1.1em;
+  vertical-align: middle;
+}
+
+.cb-captured-group {
+  display: inline-flex;
+  align-items: center;
+}
+
+.cb-captured-piece {
+  display: block;
+  flex: none;
+  width: var(--cb-captured-size, 1.15em);
+  height: var(--cb-captured-size, 1.15em);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: contain;
+}
+
+/* Overlap within a group only, so pawns stack but the pawn run stays clear of
+   the knight run. Logical margin keeps the stacking direction RTL-correct. */
+.cb-captured-piece + .cb-captured-piece {
+  margin-inline-start: calc(var(--cb-captured-size, 1.15em) * -0.42);
+}
+
+.cb-captured-score {
+  font-size: 0.8em;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--cb-chrome-muted);
+}
+
+.cb-captured-piece.white.pawn {
+  background-image: var(--cb-piece-white-pawn, url("../pieces/cburnett/wP.svg"));
+}
+.cb-captured-piece.white.knight {
+  background-image: var(--cb-piece-white-knight, url("../pieces/cburnett/wN.svg"));
+}
+.cb-captured-piece.white.bishop {
+  background-image: var(--cb-piece-white-bishop, url("../pieces/cburnett/wB.svg"));
+}
+.cb-captured-piece.white.rook {
+  background-image: var(--cb-piece-white-rook, url("../pieces/cburnett/wR.svg"));
+}
+.cb-captured-piece.white.queen {
+  background-image: var(--cb-piece-white-queen, url("../pieces/cburnett/wQ.svg"));
+}
+.cb-captured-piece.black.pawn {
+  background-image: var(--cb-piece-black-pawn, url("../pieces/cburnett/bP.svg"));
+}
+.cb-captured-piece.black.knight {
+  background-image: var(--cb-piece-black-knight, url("../pieces/cburnett/bN.svg"));
+}
+.cb-captured-piece.black.bishop {
+  background-image: var(--cb-piece-black-bishop, url("../pieces/cburnett/bB.svg"));
+}
+.cb-captured-piece.black.rook {
+  background-image: var(--cb-piece-black-rook, url("../pieces/cburnett/bR.svg"));
+}
+.cb-captured-piece.black.queen {
+  background-image: var(--cb-piece-black-queen, url("../pieces/cburnett/bQ.svg"));
+}

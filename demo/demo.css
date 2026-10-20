@@ -1,0 +1,187 @@
+/* Demo chrome only. The component's own styles live in ../assets/. */
+
+:root {
+  color-scheme: dark;
+  --bg: #16181c;
+  --panel: #1f2229;
+  --line: #333842;
+  --text: #e6e8ec;
+  --muted: #9aa2b1;
+  --accent: #6ea8fe;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 20px;
+  background: var(--bg);
+  color: var(--text);
+  font: 14px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+h1 {
+  margin: 0;
+  font-size: 20px;
+}
+
+h2 {
+  margin: 0 0 8px;
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+}
+
+.page-head {
+  margin-bottom: 16px;
+}
+
+.hint {
+  margin: 6px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.tag {
+  padding: 1px 6px;
+  border-radius: 999px;
+  background: var(--line);
+  color: var(--muted);
+  font-size: 10px;
+  letter-spacing: 0.04em;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(280px, 1fr) minmax(200px, 0.55fr) minmax(320px, 1fr);
+  gap: 20px;
+  align-items: start;
+}
+
+@media (max-width: 1100px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.board-host {
+  max-width: 480px;
+}
+
+.board-host-small {
+  max-width: 260px;
+}
+
+/* Game frame: the chrome modules bring their own styling, so the demo only
+   stacks them and caps the board width. */
+.game-frame {
+  display: flex;
+  max-width: 420px;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.game-frame-board {
+  display: block;
+}
+
+.readout {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 4px 12px;
+  margin: 14px 0 0;
+  font-size: 12px;
+}
+
+.readout dt {
+  color: var(--muted);
+}
+
+.readout dd {
+  margin: 0;
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  word-break: break-all;
+}
+
+.controls {
+  display: grid;
+  gap: 12px;
+}
+
+fieldset {
+  margin: 0;
+  padding: 10px 12px 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+}
+
+legend {
+  padding: 0 6px;
+  color: var(--muted);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  margin-top: 6px;
+}
+
+button {
+  padding: 5px 10px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #2a2f38;
+  color: var(--text);
+  font: inherit;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+button:hover {
+  border-color: var(--accent);
+}
+
+input[type="text"] {
+  flex: 1 1 220px;
+  min-width: 0;
+  padding: 5px 8px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #14161a;
+  color: var(--text);
+  font-family: ui-monospace, Menlo, monospace;
+  font-size: 12px;
+}
+
+select {
+  padding: 4px 6px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #2a2f38;
+  color: var(--text);
+  font: inherit;
+  font-size: 12px;
+}
+
+label {
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+  font-size: 12px;
+}
+
+output {
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+

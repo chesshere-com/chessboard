@@ -1,0 +1,19 @@
+{
+    "compilerOptions": {
+        "strict": true,
+        "target": "ESNext",
+        "module": "ESNext",
+        "moduleResolution": "bundler",
+        "lib": ["ESNext", "DOM", "DOM.Iterable"],
+        "noEmit": true,
+        "isolatedModules": true,
+        "allowImportingTsExtensions": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "verbatimModuleSyntax": true,
+        "erasableSyntaxOnly": true,
+        "jsx": "preserve",
+        "jsxImportSource": "solid-js"
+    },
+    "include": ["src/**/*.ts", "solid/**/*.ts", "solid/**/*.tsx", "demo/**/*.ts", "demo/**/*.tsx"]
+}
