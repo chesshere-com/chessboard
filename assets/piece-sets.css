@@ -22,18 +22,18 @@
 }
 
 [data-cb-pieces="celtic"] {
-  --cb-piece-white-pawn: url("/static/piece-sets/celtic/wP.svg");
-  --cb-piece-white-knight: url("/static/piece-sets/celtic/wN.svg");
-  --cb-piece-white-bishop: url("/static/piece-sets/celtic/wB.svg");
-  --cb-piece-white-rook: url("/static/piece-sets/celtic/wR.svg");
-  --cb-piece-white-queen: url("/static/piece-sets/celtic/wQ.svg");
-  --cb-piece-white-king: url("/static/piece-sets/celtic/wK.svg");
-  --cb-piece-black-pawn: url("/static/piece-sets/celtic/bP.svg");
-  --cb-piece-black-knight: url("/static/piece-sets/celtic/bN.svg");
-  --cb-piece-black-bishop: url("/static/piece-sets/celtic/bB.svg");
-  --cb-piece-black-rook: url("/static/piece-sets/celtic/bR.svg");
-  --cb-piece-black-queen: url("/static/piece-sets/celtic/bQ.svg");
-  --cb-piece-black-king: url("/static/piece-sets/celtic/bK.svg");
+  --cb-piece-white-pawn: url("../pieces/celtic/wP.svg");
+  --cb-piece-white-knight: url("../pieces/celtic/wN.svg");
+  --cb-piece-white-bishop: url("../pieces/celtic/wB.svg");
+  --cb-piece-white-rook: url("../pieces/celtic/wR.svg");
+  --cb-piece-white-queen: url("../pieces/celtic/wQ.svg");
+  --cb-piece-white-king: url("../pieces/celtic/wK.svg");
+  --cb-piece-black-pawn: url("../pieces/celtic/bP.svg");
+  --cb-piece-black-knight: url("../pieces/celtic/bN.svg");
+  --cb-piece-black-bishop: url("../pieces/celtic/bB.svg");
+  --cb-piece-black-rook: url("../pieces/celtic/bR.svg");
+  --cb-piece-black-queen: url("../pieces/celtic/bQ.svg");
+  --cb-piece-black-king: url("../pieces/celtic/bK.svg");
 }
 
 [data-cb-pieces="chessnut"] {
@@ -52,48 +52,48 @@
 }
 
 [data-cb-pieces="fantasy"] {
-  --cb-piece-white-pawn: url("/static/piece-sets/fantasy/wP.svg");
-  --cb-piece-white-knight: url("/static/piece-sets/fantasy/wN.svg");
-  --cb-piece-white-bishop: url("/static/piece-sets/fantasy/wB.svg");
-  --cb-piece-white-rook: url("/static/piece-sets/fantasy/wR.svg");
-  --cb-piece-white-queen: url("/static/piece-sets/fantasy/wQ.svg");
-  --cb-piece-white-king: url("/static/piece-sets/fantasy/wK.svg");
-  --cb-piece-black-pawn: url("/static/piece-sets/fantasy/bP.svg");
-  --cb-piece-black-knight: url("/static/piece-sets/fantasy/bN.svg");
-  --cb-piece-black-bishop: url("/static/piece-sets/fantasy/bB.svg");
-  --cb-piece-black-rook: url("/static/piece-sets/fantasy/bR.svg");
-  --cb-piece-black-queen: url("/static/piece-sets/fantasy/bQ.svg");
-  --cb-piece-black-king: url("/static/piece-sets/fantasy/bK.svg");
+  --cb-piece-white-pawn: url("../pieces/fantasy/wP.svg");
+  --cb-piece-white-knight: url("../pieces/fantasy/wN.svg");
+  --cb-piece-white-bishop: url("../pieces/fantasy/wB.svg");
+  --cb-piece-white-rook: url("../pieces/fantasy/wR.svg");
+  --cb-piece-white-queen: url("../pieces/fantasy/wQ.svg");
+  --cb-piece-white-king: url("../pieces/fantasy/wK.svg");
+  --cb-piece-black-pawn: url("../pieces/fantasy/bP.svg");
+  --cb-piece-black-knight: url("../pieces/fantasy/bN.svg");
+  --cb-piece-black-bishop: url("../pieces/fantasy/bB.svg");
+  --cb-piece-black-rook: url("../pieces/fantasy/bR.svg");
+  --cb-piece-black-queen: url("../pieces/fantasy/bQ.svg");
+  --cb-piece-black-king: url("../pieces/fantasy/bK.svg");
 }
 
 [data-cb-pieces="firi"] {
-  --cb-piece-white-pawn: url("/static/piece-sets/firi/wP.svg");
-  --cb-piece-white-knight: url("/static/piece-sets/firi/wN.svg");
-  --cb-piece-white-bishop: url("/static/piece-sets/firi/wB.svg");
-  --cb-piece-white-rook: url("/static/piece-sets/firi/wR.svg");
-  --cb-piece-white-queen: url("/static/piece-sets/firi/wQ.svg");
-  --cb-piece-white-king: url("/static/piece-sets/firi/wK.svg");
-  --cb-piece-black-pawn: url("/static/piece-sets/firi/bP.svg");
-  --cb-piece-black-knight: url("/static/piece-sets/firi/bN.svg");
-  --cb-piece-black-bishop: url("/static/piece-sets/firi/bB.svg");
-  --cb-piece-black-rook: url("/static/piece-sets/firi/bR.svg");
-  --cb-piece-black-queen: url("/static/piece-sets/firi/bQ.svg");
-  --cb-piece-black-king: url("/static/piece-sets/firi/bK.svg");
+  --cb-piece-white-pawn: url("../pieces/firi/wP.svg");
+  --cb-piece-white-knight: url("../pieces/firi/wN.svg");
+  --cb-piece-white-bishop: url("../pieces/firi/wB.svg");
+  --cb-piece-white-rook: url("../pieces/firi/wR.svg");
+  --cb-piece-white-queen: url("../pieces/firi/wQ.svg");
+  --cb-piece-white-king: url("../pieces/firi/wK.svg");
+  --cb-piece-black-pawn: url("../pieces/firi/bP.svg");
+  --cb-piece-black-knight: url("../pieces/firi/bN.svg");
+  --cb-piece-black-bishop: url("../pieces/firi/bB.svg");
+  --cb-piece-black-rook: url("../pieces/firi/bR.svg");
+  --cb-piece-black-queen: url("../pieces/firi/bQ.svg");
+  --cb-piece-black-king: url("../pieces/firi/bK.svg");
 }
 
 [data-cb-pieces="flat-cc0"] {
-  --cb-piece-white-pawn: url("/static/piece-sets/flat-cc0/wP.svg");
-  --cb-piece-white-knight: url("/static/piece-sets/flat-cc0/wN.svg");
-  --cb-piece-white-bishop: url("/static/piece-sets/flat-cc0/wB.svg");
-  --cb-piece-white-rook: url("/static/piece-sets/flat-cc0/wR.svg");
-  --cb-piece-white-queen: url("/static/piece-sets/flat-cc0/wQ.svg");
-  --cb-piece-white-king: url("/static/piece-sets/flat-cc0/wK.svg");
-  --cb-piece-black-pawn: url("/static/piece-sets/flat-cc0/bP.svg");
-  --cb-piece-black-knight: url("/static/piece-sets/flat-cc0/bN.svg");
-  --cb-piece-black-bishop: url("/static/piece-sets/flat-cc0/bB.svg");
-  --cb-piece-black-rook: url("/static/piece-sets/flat-cc0/bR.svg");
-  --cb-piece-black-queen: url("/static/piece-sets/flat-cc0/bQ.svg");
-  --cb-piece-black-king: url("/static/piece-sets/flat-cc0/bK.svg");
+  --cb-piece-white-pawn: url("../pieces/flat-cc0/wP.svg");
+  --cb-piece-white-knight: url("../pieces/flat-cc0/wN.svg");
+  --cb-piece-white-bishop: url("../pieces/flat-cc0/wB.svg");
+  --cb-piece-white-rook: url("../pieces/flat-cc0/wR.svg");
+  --cb-piece-white-queen: url("../pieces/flat-cc0/wQ.svg");
+  --cb-piece-white-king: url("../pieces/flat-cc0/wK.svg");
+  --cb-piece-black-pawn: url("../pieces/flat-cc0/bP.svg");
+  --cb-piece-black-knight: url("../pieces/flat-cc0/bN.svg");
+  --cb-piece-black-bishop: url("../pieces/flat-cc0/bB.svg");
+  --cb-piece-black-rook: url("../pieces/flat-cc0/bR.svg");
+  --cb-piece-black-queen: url("../pieces/flat-cc0/bQ.svg");
+  --cb-piece-black-king: url("../pieces/flat-cc0/bK.svg");
 }
 
 [data-cb-pieces="font-awesome"] {
@@ -112,76 +112,76 @@
 }
 
 [data-cb-pieces="kiwen-suwi"] {
-  --cb-piece-white-pawn: url("/static/piece-sets/kiwen-suwi/wP.svg");
-  --cb-piece-white-knight: url("/static/piece-sets/kiwen-suwi/wN.svg");
-  --cb-piece-white-bishop: url("/static/piece-sets/kiwen-suwi/wB.svg");
-  --cb-piece-white-rook: url("/static/piece-sets/kiwen-suwi/wR.svg");
-  --cb-piece-white-queen: url("/static/piece-sets/kiwen-suwi/wQ.svg");
-  --cb-piece-white-king: url("/static/piece-sets/kiwen-suwi/wK.svg");
-  --cb-piece-black-pawn: url("/static/piece-sets/kiwen-suwi/bP.svg");
-  --cb-piece-black-knight: url("/static/piece-sets/kiwen-suwi/bN.svg");
-  --cb-piece-black-bishop: url("/static/piece-sets/kiwen-suwi/bB.svg");
-  --cb-piece-black-rook: url("/static/piece-sets/kiwen-suwi/bR.svg");
-  --cb-piece-black-queen: url("/static/piece-sets/kiwen-suwi/bQ.svg");
-  --cb-piece-black-king: url("/static/piece-sets/kiwen-suwi/bK.svg");
+  --cb-piece-white-pawn: url("../pieces/kiwen-suwi/wP.svg");
+  --cb-piece-white-knight: url("../pieces/kiwen-suwi/wN.svg");
+  --cb-piece-white-bishop: url("../pieces/kiwen-suwi/wB.svg");
+  --cb-piece-white-rook: url("../pieces/kiwen-suwi/wR.svg");
+  --cb-piece-white-queen: url("../pieces/kiwen-suwi/wQ.svg");
+  --cb-piece-white-king: url("../pieces/kiwen-suwi/wK.svg");
+  --cb-piece-black-pawn: url("../pieces/kiwen-suwi/bP.svg");
+  --cb-piece-black-knight: url("../pieces/kiwen-suwi/bN.svg");
+  --cb-piece-black-bishop: url("../pieces/kiwen-suwi/bB.svg");
+  --cb-piece-black-rook: url("../pieces/kiwen-suwi/bR.svg");
+  --cb-piece-black-queen: url("../pieces/kiwen-suwi/bQ.svg");
+  --cb-piece-black-king: url("../pieces/kiwen-suwi/bK.svg");
 }
 
 [data-cb-pieces="livius"] {
-  --cb-piece-white-pawn: url("/static/piece-sets/livius/wP.svg");
-  --cb-piece-white-knight: url("/static/piece-sets/livius/wN.svg");
-  --cb-piece-white-bishop: url("/static/piece-sets/livius/wB.svg");
-  --cb-piece-white-rook: url("/static/piece-sets/livius/wR.svg");
-  --cb-piece-white-queen: url("/static/piece-sets/livius/wQ.svg");
-  --cb-piece-white-king: url("/static/piece-sets/livius/wK.svg");
-  --cb-piece-black-pawn: url("/static/piece-sets/livius/bP.svg");
-  --cb-piece-black-knight: url("/static/piece-sets/livius/bN.svg");
-  --cb-piece-black-bishop: url("/static/piece-sets/livius/bB.svg");
-  --cb-piece-black-rook: url("/static/piece-sets/livius/bR.svg");
-  --cb-piece-black-queen: url("/static/piece-sets/livius/bQ.svg");
-  --cb-piece-black-king: url("/static/piece-sets/livius/bK.svg");
+  --cb-piece-white-pawn: url("../pieces/livius/wP.svg");
+  --cb-piece-white-knight: url("../pieces/livius/wN.svg");
+  --cb-piece-white-bishop: url("../pieces/livius/wB.svg");
+  --cb-piece-white-rook: url("../pieces/livius/wR.svg");
+  --cb-piece-white-queen: url("../pieces/livius/wQ.svg");
+  --cb-piece-white-king: url("../pieces/livius/wK.svg");
+  --cb-piece-black-pawn: url("../pieces/livius/bP.svg");
+  --cb-piece-black-knight: url("../pieces/livius/bN.svg");
+  --cb-piece-black-bishop: url("../pieces/livius/bB.svg");
+  --cb-piece-black-rook: url("../pieces/livius/bR.svg");
+  --cb-piece-black-queen: url("../pieces/livius/bQ.svg");
+  --cb-piece-black-king: url("../pieces/livius/bK.svg");
 }
 
 [data-cb-pieces="material-design"] {
-  --cb-piece-white-pawn: url("/static/piece-sets/material-design/wP.svg");
-  --cb-piece-white-knight: url("/static/piece-sets/material-design/wN.svg");
-  --cb-piece-white-bishop: url("/static/piece-sets/material-design/wB.svg");
-  --cb-piece-white-rook: url("/static/piece-sets/material-design/wR.svg");
-  --cb-piece-white-queen: url("/static/piece-sets/material-design/wQ.svg");
-  --cb-piece-white-king: url("/static/piece-sets/material-design/wK.svg");
-  --cb-piece-black-pawn: url("/static/piece-sets/material-design/bP.svg");
-  --cb-piece-black-knight: url("/static/piece-sets/material-design/bN.svg");
-  --cb-piece-black-bishop: url("/static/piece-sets/material-design/bB.svg");
-  --cb-piece-black-rook: url("/static/piece-sets/material-design/bR.svg");
-  --cb-piece-black-queen: url("/static/piece-sets/material-design/bQ.svg");
-  --cb-piece-black-king: url("/static/piece-sets/material-design/bK.svg");
+  --cb-piece-white-pawn: url("../pieces/material-design/wP.svg");
+  --cb-piece-white-knight: url("../pieces/material-design/wN.svg");
+  --cb-piece-white-bishop: url("../pieces/material-design/wB.svg");
+  --cb-piece-white-rook: url("../pieces/material-design/wR.svg");
+  --cb-piece-white-queen: url("../pieces/material-design/wQ.svg");
+  --cb-piece-white-king: url("../pieces/material-design/wK.svg");
+  --cb-piece-black-pawn: url("../pieces/material-design/bP.svg");
+  --cb-piece-black-knight: url("../pieces/material-design/bN.svg");
+  --cb-piece-black-bishop: url("../pieces/material-design/bB.svg");
+  --cb-piece-black-rook: url("../pieces/material-design/bR.svg");
+  --cb-piece-black-queen: url("../pieces/material-design/bQ.svg");
+  --cb-piece-black-king: url("../pieces/material-design/bK.svg");
 }
 
 [data-cb-pieces="rhosgfx"] {
-  --cb-piece-white-pawn: url("/static/piece-sets/rhosgfx/wP.svg");
-  --cb-piece-white-knight: url("/static/piece-sets/rhosgfx/wN.svg");
-  --cb-piece-white-bishop: url("/static/piece-sets/rhosgfx/wB.svg");
-  --cb-piece-white-rook: url("/static/piece-sets/rhosgfx/wR.svg");
-  --cb-piece-white-queen: url("/static/piece-sets/rhosgfx/wQ.svg");
-  --cb-piece-white-king: url("/static/piece-sets/rhosgfx/wK.svg");
-  --cb-piece-black-pawn: url("/static/piece-sets/rhosgfx/bP.svg");
-  --cb-piece-black-knight: url("/static/piece-sets/rhosgfx/bN.svg");
-  --cb-piece-black-bishop: url("/static/piece-sets/rhosgfx/bB.svg");
-  --cb-piece-black-rook: url("/static/piece-sets/rhosgfx/bR.svg");
-  --cb-piece-black-queen: url("/static/piece-sets/rhosgfx/bQ.svg");
-  --cb-piece-black-king: url("/static/piece-sets/rhosgfx/bK.svg");
+  --cb-piece-white-pawn: url("../pieces/rhosgfx/wP.svg");
+  --cb-piece-white-knight: url("../pieces/rhosgfx/wN.svg");
+  --cb-piece-white-bishop: url("../pieces/rhosgfx/wB.svg");
+  --cb-piece-white-rook: url("../pieces/rhosgfx/wR.svg");
+  --cb-piece-white-queen: url("../pieces/rhosgfx/wQ.svg");
+  --cb-piece-white-king: url("../pieces/rhosgfx/wK.svg");
+  --cb-piece-black-pawn: url("../pieces/rhosgfx/bP.svg");
+  --cb-piece-black-knight: url("../pieces/rhosgfx/bN.svg");
+  --cb-piece-black-bishop: url("../pieces/rhosgfx/bB.svg");
+  --cb-piece-black-rook: url("../pieces/rhosgfx/bR.svg");
+  --cb-piece-black-queen: url("../pieces/rhosgfx/bQ.svg");
+  --cb-piece-black-king: url("../pieces/rhosgfx/bK.svg");
 }
 
 [data-cb-pieces="spatial"] {
-  --cb-piece-white-pawn: url("/static/piece-sets/spatial/wP.svg");
-  --cb-piece-white-knight: url("/static/piece-sets/spatial/wN.svg");
-  --cb-piece-white-bishop: url("/static/piece-sets/spatial/wB.svg");
-  --cb-piece-white-rook: url("/static/piece-sets/spatial/wR.svg");
-  --cb-piece-white-queen: url("/static/piece-sets/spatial/wQ.svg");
-  --cb-piece-white-king: url("/static/piece-sets/spatial/wK.svg");
-  --cb-piece-black-pawn: url("/static/piece-sets/spatial/bP.svg");
-  --cb-piece-black-knight: url("/static/piece-sets/spatial/bN.svg");
-  --cb-piece-black-bishop: url("/static/piece-sets/spatial/bB.svg");
-  --cb-piece-black-rook: url("/static/piece-sets/spatial/bR.svg");
-  --cb-piece-black-queen: url("/static/piece-sets/spatial/bQ.svg");
-  --cb-piece-black-king: url("/static/piece-sets/spatial/bK.svg");
+  --cb-piece-white-pawn: url("../pieces/spatial/wP.svg");
+  --cb-piece-white-knight: url("../pieces/spatial/wN.svg");
+  --cb-piece-white-bishop: url("../pieces/spatial/wB.svg");
+  --cb-piece-white-rook: url("../pieces/spatial/wR.svg");
+  --cb-piece-white-queen: url("../pieces/spatial/wQ.svg");
+  --cb-piece-white-king: url("../pieces/spatial/wK.svg");
+  --cb-piece-black-pawn: url("../pieces/spatial/bP.svg");
+  --cb-piece-black-knight: url("../pieces/spatial/bN.svg");
+  --cb-piece-black-bishop: url("../pieces/spatial/bB.svg");
+  --cb-piece-black-rook: url("../pieces/spatial/bR.svg");
+  --cb-piece-black-queen: url("../pieces/spatial/bQ.svg");
+  --cb-piece-black-king: url("../pieces/spatial/bK.svg");
 }

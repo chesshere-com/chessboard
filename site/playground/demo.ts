@@ -7,13 +7,13 @@
  * stands in for the real engine so the dests pipeline can be driven by hand.
  */
 
-import "../assets/chess-board.css";
-import "../assets/piece-sets.css";
-import "../assets/chrome.css";
+import "../../assets/chess-board.css";
+import "../../assets/piece-sets.css";
+import "../../assets/chrome.css";
 
-import { ChessBoard, pos2key, readFen } from "../src/index.ts";
+import { ChessBoard, pos2key, readFen } from "../../src/index.ts";
 import { mountGameFrame } from "./game-frame.tsx";
-import type { Api, Color, Dests, Key, MoveMetadata, Piece, Pieces, Pos, Shape } from "../src/index.ts";
+import type { Api, Color, Dests, Key, MoveMetadata, Piece, Pieces, Pos, Shape } from "../../src/index.ts";
 
 // ---------------------------------------------------------------------------
 // Demo-only pseudo-legal move generation

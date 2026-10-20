@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>chessboard - a fast, dependency-free chessboard for the web</title>
+<meta name="description" content="Animated, draggable chessboard with premoves, shapes, Chess960 and optional SolidJS bindings. No runtime dependencies.">
+<link rel="stylesheet" href="./site.css">
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="./index.html">chessboard</a>
+  <nav><a href="./docs/index.html">Docs</a><a href="./playground/index.html">Playground</a><a href="https://github.com/chesshere-com/chessboard">GitHub</a></nav>
+</header>
+
+<section class="hero">
+  <div class="hero-copy">
+    <h1>A chessboard that gets out of your way.</h1>
+    <p class="lede">Framework-agnostic TypeScript, no runtime dependencies, about 15 kB gzipped. Drag, click, premove, draw arrows, theme with CSS variables. It renders and collects input; you decide what is legal.</p>
+    <pre class="install"><code>npm install @chesshere/chessboard</code></pre>
+    <p class="cta"><a class="btn primary" href="./docs/index.html">Read the docs</a> <a class="btn" href="./playground/index.html">Open the playground</a></p>
+  </div>
+  <div class="hero-board">
+    <div class="board-box"><div id="hero-board"></div></div>
+    <p class="caption"><span id="hero-status">You are white. Drag a piece, or click and click.</span> <button id="hero-reset" class="link">New game</button></p>
+  </div>
+</section>
+
+<section class="features">
+  <div><h3>Zero dependencies</h3><p>The core imports nothing, including any chess rules library. Pair it with chess.js, a server, or an engine.</p></div>
+  <div><h3>Smooth by construction</h3><p>Position updates are diffed and animated. Racing server moves converge instead of desyncing.</p></div>
+  <div><h3>Premoves and touch</h3><p>Premove geometry built in, with scroll-aware touch handling so boards in long pages stay usable.</p></div>
+  <div><h3>Shapes</h3><p>Arrows, circles, regions, glyphs, ghost pieces and effects, as plain JSON you can store.</p></div>
+  <div><h3>Themeable</h3><p>Every visual is a <code>--cb-*</code> custom property. 12 licensed piece sets included.</p></div>
+  <div><h3>Optional Solid</h3><p>A thin SolidJS wrapper plus player bars, clocks, captured material and navigation controls.</p></div>
+</section>
+
+<section class="demo">
+  <div class="demo-copy">
+    <h2>Replay with animation</h2>
+    <p>Each step is a single <code>board.set({ fen, lastMove })</code>. The board diffs the two positions and animates the difference, including castling.</p>
+    <p class="controls"><button id="r-first">|&lt;</button><button id="r-prev">&lt;</button><button id="r-next">&gt;</button><button id="r-last">&gt;|</button><button id="r-play">Play</button></p>
+    <p class="caption" id="r-label"></p>
+<pre><code>board.set({
+  fen,
+  lastMove: [from, to],
+  check: inCheck,
+});</code></pre>
+  </div>
+  <div class="board-box small"><div id="replay-board"></div></div>
+</section>
+
+<section class="demo flip">
+  <div class="demo-copy">
+    <h2>Shapes</h2>
+    <p>Two channels: your app's <code>autoShapes</code> and the user's own right-drag scribbles. Try drawing on the board; your shapes never disturb the app's.</p>
+    <p class="controls" id="shape-buttons"></p>
+<pre><code>board.setAutoShapes([
+  { type: "arrow", from: "e2", to: "e4", brush: "green" },
+  { type: "circle", square: "d5", brush: "red" },
+]);</code></pre>
+  </div>
+  <div class="board-box small"><div id="shapes-board"></div></div>
+</section>
+
+<section class="demo">
+  <div class="demo-copy">
+    <h2>Piece sets and theme</h2>
+    <p>Switch the piece set with one attribute and recolor the board with CSS variables.</p>
+    <p class="controls">
+      <label>Pieces <select id="set-select"></select></label>
+      <label>Light <input id="c-light" type="color" value="#f0d9b5"></label>
+      <label>Dark <input id="c-dark" type="color" value="#b58863"></label>
+    </p>
+<pre><code>&lt;div data-cb-pieces="celtic"&gt;&lt;/div&gt;
+
+.board { --cb-light: #ebecd0; --cb-dark: #739552; }</code></pre>
+  </div>
+  <div class="board-box small"><div id="theme-board"></div></div>
+</section>
+
+<footer class="foot">
+  <p>MIT licensed. Extracted from <a href="https://chesshere.com">ChessHere</a>. <a href="https://github.com/chesshere-com/chessboard">Source on GitHub</a>.</p>
+</footer>
+<script type="module" src="./main.ts"></script>
+</body>
+</html>

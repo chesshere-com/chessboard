@@ -1,5 +1,7 @@
 # chessboard
 
+**[Live demos and docs](https://chesshere-com.github.io/chessboard/)** | [Playground](https://chesshere-com.github.io/chessboard/playground/)
+
 A fast, dependency-free chessboard for the web, extracted from [ChessHere](https://chesshere.com). Framework-agnostic TypeScript core, optional SolidJS bindings and game chrome (player bars, clocks, captured material, navigation controls), and twelve bundled piece sets.
 
 - Drag and drop, click-to-move, touch with scroll arbitration, and pointer-based promotion dialog
@@ -86,7 +88,7 @@ const board = ChessBoard(el, {
 - [Piece sets](docs/piece-sets.md): bundled sets, custom sets, licenses
 - [SolidJS bindings and chrome](docs/solid.md)
 
-Run `npm run demo` for an interactive playground that exercises every feature.
+The [playground](https://chesshere-com.github.io/chessboard/playground/) exercises every feature; run it locally with `npm run demo`.
 
 ## Browser support
 

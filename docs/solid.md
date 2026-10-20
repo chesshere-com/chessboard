@@ -31,4 +31,4 @@ All user-facing strings arrive as props (`labels`), so translation happens in yo
 - `CapturedMaterial`: stacked captured pieces with a `+N` score on the leading side only. Props: `diff` (from `api.getMaterialDiff()`), `side`, `showScore?`, `pieceSet?`.
 - `Clock`: display-only; you own the time state. Props: `ms`, `running?`, `lowTimeMs?` (default 10000), `labels?`.
 
-Helpers `formatClock`, `capturedRow` and `leadingScore` are exported for custom layouts. The demo's [`game-frame.tsx`](../demo/game-frame.tsx) shows all of them wired together.
+Helpers `formatClock`, `capturedRow` and `leadingScore` are exported for custom layouts. The demo's [`game-frame.tsx`](../site/playground/game-frame.tsx) shows all of them wired together.

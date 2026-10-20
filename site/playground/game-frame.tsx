@@ -10,12 +10,12 @@
 import { createSignal } from "solid-js";
 import { render } from "solid-js/web";
 
-import { CapturedMaterial } from "../solid/CapturedMaterial.tsx";
-import { Clock } from "../solid/Clock.tsx";
-import { NavControls } from "../solid/NavControls.tsx";
-import { PlayerBar } from "../solid/PlayerBar.tsx";
-import { SolidChessBoard } from "../solid/SolidChessBoard.tsx";
-import type { Api, Config, MaterialDiff } from "../src/index.ts";
+import { CapturedMaterial } from "../../solid/CapturedMaterial.tsx";
+import { Clock } from "../../solid/Clock.tsx";
+import { NavControls } from "../../solid/NavControls.tsx";
+import { PlayerBar } from "../../solid/PlayerBar.tsx";
+import { SolidChessBoard } from "../../solid/SolidChessBoard.tsx";
+import type { Api, Config, MaterialDiff } from "../../src/index.ts";
 
 const PIECE_SET = "cburnett";
 

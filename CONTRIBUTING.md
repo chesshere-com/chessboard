@@ -4,7 +4,7 @@ Issues and pull requests are welcome.
 
 ```bash
 npm install
-npm run demo        # interactive demo on http://localhost:5199
+npm run demo        # site, docs and playground on http://localhost:5199
 npm run typecheck
 npm test            # Node test runner, no browser required
 npm run build       # dist/ (ES modules, .d.ts, CSS, piece sets)
